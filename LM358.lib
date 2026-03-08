@@ -1,0 +1,15 @@
+* LM358 Op-Amp - Hakan's Bulletproof Behavioral Model
+* Pin Siralamasi: 1:IN_P (+), 2:IN_N (-), 3:VCC, 4:GND, 5:OUT
+.subckt LM358 IN_P IN_N VCC GND OUT
+
+* 1. Giris Kati ve 1 MHz Bant Genisligi Ayari
+G_INT 0 INT_NODE IN_P IN_N 100u
+R_INT INT_NODE 0 10Meg
+C_INT INT_NODE 0 15.9p
+
+* 2. LM358 Cikis Limitleri (Gercekci Davranis)
+* Maksimum cikis: VCC - 1.5V | Minimum cikis: GND (0V)
+E_OUT_RAW OUT_RAW 0 INT_NODE 0 1
+B_CLIP OUT 0 V=min(max(V(OUT_RAW), V(GND)), V(VCC)-1.5)
+
+.ends LM358

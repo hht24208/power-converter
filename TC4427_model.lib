@@ -1,0 +1,17 @@
+* TC4427 Dual 1.5A MOSFET Driver - Bulletproof Behavioral Model
+* Pin Order: 1:INA, 2:INB, 3:VDD, 4:GND, 5:OUTA, 6:OUTB
+.subckt TC4427 INA INB VDD GND OUTA OUTB
+
+* --- Channel A ---
+R_INA INA GND 100k
+* 2.4V'u geçerse VDD'ye (12V) bağla, geçmezse 0V'a (GND) çek
+B_OUTA_INT NA_INT 0 V={IF(V(INA,GND)>2.4, V(VDD,GND), 0)}
+* Sürücünün 5 Ohmluk iç direnci (1.5A akım limitini simüle eder)
+R_OUTA NA_INT OUTA 5
+
+* --- Channel B ---
+R_INB INB GND 100k
+B_OUTB_INT NB_INT 0 V={IF(V(INB,GND)>2.4, V(VDD,GND), 0)}
+R_OUTB NB_INT OUTB 5
+
+.ends TC4427
