@@ -1,0 +1,15 @@
+* MC34063A İsimlendirilmiş Model (Hakan'ın Sembolü İçin)
+* Sıralama: SWC, SWE, CT, GND, FB, VCC, ISNS, DRC
+.subckt MC34063A SWC SWE CT GND FB VCC ISNS DRC
+Q1 DRC SWC SWE NPN
+Q2 ISNS DRC SWE NPN
+D1 SWE GND D
+R1 ISNS VCC 0.22
+C1 CT GND 470p
+Vref 5a GND 1.25
+B1 5b GND V=V(FB)
+S1 VCC CT 5b 5a SW
+.model NPN NPN(BF=100)
+.model D D(IS=1e-14)
+.model SW SW(VT=0 VH=0.1 RON=0.1 ROFF=1Meg)
+.ends MC34063A

@@ -1,0 +1,6 @@
+*.raw
+*.log
+*.net
+*.op.raw
+__pycache__/
+.vscode/
