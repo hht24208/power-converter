@@ -1,24 +1,24 @@
-# STM32 Kontrollü SEPIC Güç Dönüştürücü (Power Converter)
+# STM32 Kontrollü SEPIC Güç Dönüştürücü (Öğrenci Projesi)
 
-Bu proje, geniş giriş voltajı aralıklarında çalışabilen, yazılım tabanlı (STM32) PID kontrolüne sahip bir SEPIC güç dönüştürücüsünün donanım mimarisini ve LTspice üzerindeki matematiksel modellemelerini içermektedir.
+Bu repo, güç elektroniği ve kontrol teorisi konseptlerini birleştirerek pratik bir donanıma dönüştürmeyi amaçlayan kişisel bir mühendislik projesidir. Temel hedef, geniş giriş voltajı aralıklarında çalışabilen, yazılım tabanlı (STM32) PID kontrolüne sahip bir SEPIC dönüştürücünün önce LTspice üzerinde matematiksel sınırlarını görmek, ardından gerçek donanımını inşa etmektir.
 
 ## 1. Güç Katı ve Donanım Mimarisi
-Aşağıdaki şema, SEPIC topolojisinin güç katını ve geri besleme (feedback) mekanizmasını göstermektedir. Sistemde yüksek hızlı MOSFET anahtarlaması için **TC4427** gate sürücü kullanılmış olup, akım ve gerilim okumaları **LM358** op-ampları üzerinden mikrodenetleyicinin ADC pinlerine uygun hale getirilmiştir.
+Aşağıdaki şema, SEPIC topolojisinin güç katını ve temel geri besleme (feedback) yapısını göstermektedir. Sistemi mikrodenetleyici ile güvenli bir şekilde sürebilmek için **TC4427** gate sürücü entegresi kullanıldı. Akım ve gerilim okumaları ise **LM358** op-ampları ile STM32'nin ADC pinlerine uygun seviyelere çekildi.
 
 ![SEPIC Devre Şeması](images/devre.png)
 
-## 2. Matematiksel Modelleme ve PID Kontrolcü
-Sistemin 4. dereceden non-lineer yapısı (sağ yarı düzlem sıfırı ve rezonans frekansları), rastgele PID katsayılarıyla kontrol edilemez. Bu nedenle LTspice üzerinde sistemin transfer fonksiyonuna uygun bir **Type-II/III Kompansatör** tasarlanmış ve Laplace dönüşümleriyle s-domain (karmaşık frekans düzlemi) üzerinde modellenmiştir.
+## 2. Matematiksel Modelleme ve Kontrolcü Tasarımı
+SEPIC dönüştürücüler 4. dereceden non-lineer sistemler olduğu ve sağ yarı düzlem sıfırı (RHPZ) barındırdığı için, sadece deneme-yanılma ile kontrol edilmeleri oldukça zordur. Bu projede işin teorik kısmına inilerek, sistemin transfer fonksiyonuna uygun bir **Type-II/III Kompansatör** mantığı araştırılmış ve LTspice üzerinde s-domain (Laplace) denklemleriyle modellenmiştir.
 
 ![PID Kontrolcü ve Laplace Denklemi](images/controller.png)
 
-## 3. Geçici Hal Yanıtı (Transient Response) ve Inrush Yönetimi
-Aşağıdaki osiloskop çıktısı, sisteme aniden 12V (Step Input) uygulandığında donanımın ve kontrolcünün verdiği fiziksel tepkiyi göstermektedir. 
-* İlk milisaniyelerde SEPIC topolojisinin doğası gereği uçan kondansatör üzerinden geçen **Inrush Current (Başlangıç Şoku)** voltajı anlık olarak yükseltir.
-* Kontrolcü bu durumu anında tespit edip PWM görev döngüsünü (Duty Cycle) %0'a çeker.
-* Sistem 11. milisaniyede hedef voltaj olan **5V** seviyesine kusursuz ve stabil bir şekilde (sıfır kalıcı hal hatası ile) oturur.
+## 3. Geçici Hal Yanıtı (Transient Response)
+Aşağıdaki simülasyon çıktısında, sisteme aniden 12V giriş (Step Input) uygulandığında donanımın verdiği fiziksel tepki ve PID kontrolcünün davranışı incelenmiştir.
+* Simülasyonun ilk milisaniyelerinde, SEPIC topolojisindeki uçan kondansatörün (flying capacitor) dolması sırasında oluşan doğal **Inrush Current (Başlangıç Şoku)** nedeniyle voltaj anlık olarak yükseliyor.
+* Kontrolcü bu durumu yakalayarak PWM'i (Duty Cycle) %0'a çekiyor.
+* Sistem yaklaşık 11. milisaniyede hedeflediğimiz **5V** seviyesine başarıyla oturarak regülasyonu sağlıyor.
 
 ![Osiloskop Çıktısı - 12V Inrush ve 5V Regülasyonu](images/osiloskop.png)
 
 ---
-*Not: Bu simülasyonlar, gerçek dünyadaki PCB parazitikleri ve komponent toleransları göz önünde bulundurularak, STM32 üzerinde yazılacak C tabanlı dijital kontrol algoritmasına (Digital Power Supply) temel oluşturmak için tasarlanmıştır.*
+*Not: Bu simülasyon aşaması, işin "yazılım-donanım takasını" (hardware vs. software trade-off) analiz etmek için yapılmıştır. İlerleyen aşamalarda KiCad ile PCB tasarımı yapılacak ve gerçek dünyadaki komponent toleransları STM32 üzerindeki C tabanlı bir kontrol algoritmasıyla yönetilmeye çalışılacaktır.*
