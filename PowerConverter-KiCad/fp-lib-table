@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "MBR1045CadModel")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/MBR1045CadModel")(options "")(descr ""))
   (lib (name "footprints")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/UCC27517AQDBVRQ1CadModel/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "AP63205-footprints")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/AP63205CadModel/KiCADv6/footprints.pretty")(options "")(descr ""))
 )
