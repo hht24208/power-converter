@@ -4832,7 +4832,7 @@
 	)
 	(text "Bu iki toprağı (GND ve GNDA) şemada \"Net Tie\" adı verilen özel bir sembolle tek bir noktada birleştireceğiz.\n\nNerede birleşmeli? Tam olarak R3 (Şönt) direncinin alt bacağında!"
 		(exclude_from_sim no)
-		(at 774.7 214.63 0)
+		(at 773.43 29.21 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4842,7 +4842,7 @@
 	)
 	(text "Fedai Notu: Şemayı bitirirken LDO çıkışındaki C13 hala sarı tantal kondansatör, değil mi abi?"
 		(exclude_from_sim no)
-		(at 765.81 226.06 0)
+		(at 764.54 40.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
