@@ -2,6 +2,5 @@
   (version 7)
   (lib (name "footprints")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/UCC27517AQDBVRQ1CadModel/KiCADv6/footprints.pretty")(options "")(descr ""))
   (lib (name "AP63205-footprints")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/AP63205CadModel/KiCADv6/footprints.pretty")(options "")(descr ""))
-  (lib (name "SK56CadModel")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/SK56CadModel")(options "")(descr ""))
   (lib (name "IRFB7430PBFCadModel")(type "KiCad")(uri "C:/Users/Hakan/Desktop/power converter/IRFB7430PBFCadModel")(options "")(descr ""))
 )

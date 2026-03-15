@@ -1,4 +1,4 @@
-29095979311454858
+29094205827285435
 AP63205-footprints
 SOIC_05WU-7_DIO
 
@@ -98706,13 +98706,6 @@ rotary encoder illuminated switch vertical
 0
 9
 8
-SK56CadModel
-SMC
-<b>DIODE</b>
-
-0
-2
-2
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/AM2302.pdf
